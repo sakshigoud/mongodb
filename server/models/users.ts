@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    age: {
+        type: Number,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -16,6 +20,6 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-const User = mongoose.model('test', userSchema);
+const User = mongoose.model('tests', userSchema);
 
 export default User;

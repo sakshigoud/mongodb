@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import User from './models/users';
+import { timeStamp } from 'console';
 const app: express.Application = express();
 dotenv.config();
 
@@ -23,9 +24,10 @@ app.get('/', (req: Request, res: Response) => {
 //for create user
 app.post('/postusers', async (req: Request, res: Response) => {
     try {
-        const { name, email, password } = req.body;
-        const user = await User.create({ name, email, password });
+        const { name, age, email, password } = req.body;
+        const user = await User.create({ name, age, email, password });
         res.status(201).json({ message: 'User created successfully' });
+
     } catch (error) {
         console.error('Error creating user:', error);
         res.status(500).json({ error: 'Error creating user' });
@@ -33,8 +35,11 @@ app.post('/postusers', async (req: Request, res: Response) => {
 })
 
 // for get users
-app.get('/getusers', async (req: Request, res: Response) => {
+app.get('/getusers/:id', async (req: Request, res: Response) => {
     try {
+        // const { id } = req.params;
+        // const findUser = req.body;
+        // const users = await User.find(id,findUser, { new: true });
         const users = await User.find();
         res.json(users);
     } catch (error) {
